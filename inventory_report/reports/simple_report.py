@@ -18,22 +18,18 @@ class SimpleReport:
             datetime.strptime(x, '%Y-%m-%d').date() - today
           ))
 
-        return f"""
-          Data de fabricação mais antiga: {min(oldest_date)}
-          Data de validade mais próxima: {closest_date}
-          Empresa com mais produtos: NOME DA EMPRESA
-        """
+        companies = {}
+
+        for company in relatory_date:
+            if company['nome_da_empresa'] in companies:
+                companies[company['nome_da_empresa']] += 1
+            else:
+                companies[company['nome_da_empresa']] = 1
 
 
-print(SimpleReport.generate([
-     {
-       "id": 1,
-       "nome_do_produto": "CADEIRA",
-       "nome_da_empresa": "Forces of Nature",
-       "data_de_fabricacao": "2022-04-04",
-       "data_de_validade": "2023-02-09",
-       "numero_de_serie": "FR48",
-       "instrucoes_de_armazenamento": "Conservar em local fresco"
-     }
-   ])
-  )
+
+        return (
+            f"Data de fabricação mais antiga: {min(oldest_date)}\n"
+            f"Data de validade mais próxima: {closest_date}\n"
+            f"Empresa com mais produtos: {max(companies, key=companies.get)}"
+        )
