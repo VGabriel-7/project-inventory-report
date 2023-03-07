@@ -26,8 +26,6 @@ class SimpleReport:
             else:
                 companies[company['nome_da_empresa']] = 1
 
-
-
         return (
             f"Data de fabricação mais antiga: {min(oldest_date)}\n"
             f"Data de validade mais próxima: {closest_date}\n"
