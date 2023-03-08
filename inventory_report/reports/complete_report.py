@@ -17,7 +17,8 @@ class CompleteReport(SimpleReport):
         total_products = ""
 
         for company in relatory_date:
-            total_products += f"- {company['nome_da_empresa']}: {companies[company['nome_da_empresa']]}\n"
+            total_products += f"- {company['nome_da_empresa']}:\
+                {companies[company['nome_da_empresa']]}\n"
 
         return (
             f"{simple_report}\n"
