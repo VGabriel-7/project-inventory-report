@@ -6,22 +6,23 @@ class CompleteReport(SimpleReport):
     def generate(relatory_date):
         simple_report = SimpleReport.generate(relatory_date)
 
-        comps = {}
+        companies = {}
 
         for company in relatory_date:
-            if company['nome_da_empresa'] in comps:
-                comps[company['nome_da_empresa']] += 1
+            if company['nome_da_empresa'] in companies:
+                companies[company['nome_da_empresa']] += 1
             else:
-                comps[company['nome_da_empresa']] = 1
+                companies[company['nome_da_empresa']] = 1
 
-        total_products_company = ""
+        total_products = ""
 
-        for cp in relatory_date:
-            total_products_company += \
-                f"- {cp['nome_da_empresa']}: {comps[cp['nome_da_empresa']]}\n"
+        for company in relatory_date:
+            name_company = f"- {company['nome_da_empresa']}: "
+            quantity_products = f"{companies[company['nome_da_empresa']]}\n"
+            total_products += name_company + quantity_products
 
         return (
             f"{simple_report}\n"
             "Produtos estocados por empresa:\n"
-            f"{total_products_company}"
+            f"{total_products}"
         )
