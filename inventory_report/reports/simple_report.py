@@ -8,11 +8,14 @@ class SimpleReport:
             relatory['data_de_fabricacao'] for relatory in relatory_date
             ]
 
+        today = date.today()
+
         closest_dates = [
             relatory['data_de_validade'] for relatory in relatory_date
+            if datetime.strptime(
+                relatory['data_de_validade'], '%Y-%m-%d'
+            ).date() >= today
             ]
-
-        today = date.today()
 
         closest_date = min(closest_dates, key=lambda x: abs(
             datetime.strptime(x, '%Y-%m-%d').date() - today
