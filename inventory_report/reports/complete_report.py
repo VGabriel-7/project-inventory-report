@@ -16,9 +16,9 @@ class CompleteReport(SimpleReport):
 
         total_products = "Produtos estocados por empresa:\n"
 
-        for company in relatory_date:
-            name_company = f"- {company['nome_da_empresa']}: "
-            quantity_products = f"{companies[company['nome_da_empresa']]}\n"
+        for company in companies.keys():
+            name_company = f"- {company}: "
+            quantity_products = f"{companies[company]}\n"
             total_products += name_company + quantity_products
 
         return f"{simple_report}\n{total_products}"

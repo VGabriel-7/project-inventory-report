@@ -8,8 +8,10 @@ class Inventory:
     def import_data(file, type):
         with open(file, encoding='utf-8') as file:
             file_content = csv.DictReader(file, delimiter=',', quotechar='"')
-
+            file_content_edited = [row for row in file_content]
             if type == 'simples':
-                return SimpleReport.generate(file_content)
-
-            return CompleteReport.generate(file_content)
+                report_simple = SimpleReport.generate(file_content_edited)
+                return report_simple
+            elif type == 'completo':
+                report_coomplete = CompleteReport.generate(file_content_edited)
+                return report_coomplete
