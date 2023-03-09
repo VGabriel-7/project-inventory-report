@@ -1,7 +1,10 @@
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
+
+
 import csv
 import json
+import xmltodict
 
 
 class Inventory:
@@ -22,6 +25,14 @@ class Inventory:
         except FileNotFoundError:
             raise ("File not found")
 
+    @staticmethod
+    def xml_converter(path):
+        try:
+            with open(path) as file:
+                return xmltodict.parse(file.read())['dataset']['record']
+        except FileNotFoundError:
+            raise ("File not found")
+
     @classmethod
     def extensions_type(cls, path):
         if '.csv' in path:
@@ -29,7 +40,7 @@ class Inventory:
         if '.json' in path:
             return cls.json_converter(path)
         if '.xml' in path:
-            return cls.json_converter(path)
+            return cls.xml_converter(path)
 
     @classmethod
     def import_data(cls, path, type):
